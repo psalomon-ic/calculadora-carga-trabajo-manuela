@@ -509,6 +509,7 @@
             slots = Math.max(0, parseFloat(val) || 0);
             CAPACIDAD_TOTAL = slots * HORAS_POR_SLOT;
             document.getElementById('slotsInput').value = slots;
+            try { localStorage.setItem('slotsConfig', slots); } catch(e) {}
             render();
         }
 
@@ -655,6 +656,13 @@
         // Init — auto-connect on load
         function initApp() {
             tareas = [];
+            try {
+                const saved = localStorage.getItem('slotsConfig');
+                if (saved !== null && saved !== '') {
+                    slots = Math.max(0, parseFloat(saved) || 0);
+                    CAPACIDAD_TOTAL = slots * HORAS_POR_SLOT;
+                }
+            } catch(e) {}
             render();
             document.getElementById('scriptUrl').value = scriptUrl;
             setTimeout(connectSheets, 500);
