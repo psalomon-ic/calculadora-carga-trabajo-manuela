@@ -564,7 +564,8 @@
             const disp = CAPACIDAD_TOTAL - total;
             const pct = CAPACIDAD_TOTAL > 0 ? (total / CAPACIDAD_TOTAL) * 100 : 0;
 
-            document.getElementById('capacidadTotal').innerHTML = CAPACIDAD_TOTAL + '<span class="metric-unit">h</span>';
+            const capFmt = (Math.round(CAPACIDAD_TOTAL * 10) / 10).toString().replace('.', ',');
+            document.getElementById('capacidadTotal').innerHTML = capFmt + '<span class="metric-unit">h</span>';
             document.getElementById('horasAsignadas').innerHTML = total.toFixed(1) + '<span class="metric-unit">h</span>';
             document.getElementById('horasDisponibles').innerHTML = disp.toFixed(1) + '<span class="metric-unit">h</span>';
             document.getElementById('porcentajeOcupacion').innerHTML = pct.toFixed(0) + '<span class="metric-unit">%</span>';
